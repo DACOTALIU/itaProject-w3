@@ -3,6 +3,7 @@ package Servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +47,10 @@ public class loginServlet extends HttpServlet {
 			System.out.println("Your enter is wrong");
 		}
 		request.getRequestDispatcher("HomePage.jsp").forward(request, response);
+//		  RequestDispatcher   requestDispatcher=request.getRequestDispatcher("/itaProject-w3/index.html");   
+//		  requestDispatcher.forward(request,response);
+//		response.sendRedirect("/itaProject-w3/index.html");//重定向
+//		request.getRequestDispatcher("/itaProject-w3/index.html").forward(request, response);
 	}
 
 	/**
