@@ -46,10 +46,10 @@ public class loginServlet extends HttpServlet {
 		} else {
 			System.out.println("Your enter is wrong");
 		}
-		request.getRequestDispatcher("HomePage.jsp").forward(request, response);
+		request.getRequestDispatcher("index.html").forward(request, response);
 //		  RequestDispatcher   requestDispatcher=request.getRequestDispatcher("/itaProject-w3/index.html");   
 //		  requestDispatcher.forward(request,response);
-//		response.sendRedirect("/itaProject-w3/index.html");//重定向
+//		response.sendRedirect("index.html");//重定向
 //		request.getRequestDispatcher("/itaProject-w3/index.html").forward(request, response);
 	}
 

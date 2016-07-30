@@ -11,7 +11,11 @@ public class testService {
 CClientManager cManager=new CClientManagerImpl();
 	@Test
 	public void checkPwd() {
-		cManager.checkPwd("amy", "123");
+		cManager.checkPwd("amliy", "123");
+	}
+	@Test
+	public void checkUsernameExist(){
+		assert(cManager.checkUserExist("amy")==0);
 	}
 
 }

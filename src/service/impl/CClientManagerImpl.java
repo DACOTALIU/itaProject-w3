@@ -22,12 +22,9 @@ public class CClientManagerImpl implements CClientManager {
 		// TODO Auto-generated method stub
 		List<CClient> cClients = cClientDao.listCClients();
 		for (CClient cClient : cClients) {
-			if (cClient.getcUsername().equals(Username)&& cClient.getcPassword().equals(Password)) {
+			if (cClient.getcUsername().equals(Username) && cClient.getcPassword().equals(Password)) {
 				System.out.println("custom information is allow");
 				return 1;
-			}
-			else {
-				return 0;
 			}
 		}
 
@@ -37,8 +34,19 @@ public class CClientManagerImpl implements CClientManager {
 
 	@Override
 	public List<CClient> listCClientsStartWith(String cUsernameFisrt) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	public int checkUserExist(String Username) {
+		List<CClient> cClients = cClientDao.listCClients();
+		for (CClient cClient : cClients) {
+			if (cClient.getcUsername().equals(Username)) {
+				System.out.println("The username is exist.");
+				return 0;
+			}
+
+		}
+		System.out.println("The username can be use.");
+		return 1;
+	}
 }

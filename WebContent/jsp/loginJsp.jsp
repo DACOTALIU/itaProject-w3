@@ -23,6 +23,6 @@
 			<input type="button" id="back" name="back" value="Back" />
 		</div>
 	</form>
-	<a href="">register</a>
+	<a href="http://10.222.232.152:8082/itaProject-w3/register.html">register</a>
 </body>
 </html>

@@ -30,4 +30,24 @@
     <url-pattern>/testLoginServlet</url-pattern>
     <url-pattern>/testlogin</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RegisterServlet</display-name>
+    <servlet-name>RegisterServlet</servlet-name>
+    <servlet-class>Servlet.RegisterServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisterServlet</servlet-name>
+    <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserExist</display-name>
+    <servlet-name>UserExist</servlet-name>
+    <servlet-class>Servlet.UserExist</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserExist</servlet-name>
+    <url-pattern>/exist</url-pattern>
+  </servlet-mapping>
 </web-app>

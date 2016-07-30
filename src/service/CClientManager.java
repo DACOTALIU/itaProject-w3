@@ -8,4 +8,5 @@ public interface CClientManager {
 	public int addCClient(String cUsername,String cPassword);
 	public int checkPwd(String cUsername,String cPassword);
 	public List<CClient> listCClientsStartWith(String cUsernameFisrt);
+	public int checkUserExist(String Username);
 }
