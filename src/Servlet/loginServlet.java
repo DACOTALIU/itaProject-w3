@@ -39,7 +39,7 @@ public class loginServlet extends HttpServlet {
 		HttpSession httpSession = request.getSession();
 		CClientManager cClientManager = new CClientManagerImpl();
 		if (cClientManager.checkPwd(username, password) == 1) {
-			System.out.println("enter right2");
+			System.out.println("enter right");
 			CClient client = new CClient(username, password);
 			httpSession.setAttribute("client", client);
 		} else {

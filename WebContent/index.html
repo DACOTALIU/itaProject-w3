@@ -9,32 +9,256 @@
 <body>
     <link rel="stylesheet" href="./css/HomePage.css" type="text/css" />
     <script type="text/javascript" src="javaScript/UserController.js"></script>
+    <script type="text/javascript" src="javaScript/Map.js"></script>
+
     <body>
         <div id="container">
             <div id="header">
                 <div class="controller" id="user">
+                    <div id="showName"> </div>
                     <button type="button" id="login">Login</button>
                     <button type="button" id="logout">Logout</button>
                     <button type="button" id="order">Order</button>
                 </div>
             </div>
             <div id="advertisement">
-                <h1>Advertisement area</h1>>
+                <h1>Advertisement area</h1>
             </div>
             <div id="main">
-                <div class="content-left" id="mianContent">
+                <div class="content-left" id="content-left">
                     <div class="showDishes">
                         <h4>script</h4>
                         <script type="text/javascript">
+                        (function() {
+                            function ShoppingCart(name, price, count, pic, flag) {
+                                this.name = name;
+                                this.price = price;
+                                this.count = count;
+                                this.pic = pic;
+                                this.flag = flag;
+                            }
+
+                            var shoppingCart1 = new ShoppingCart("fish", 40, 0, 1, 0);
+                            var shoppingCart2 = new ShoppingCart("vegi", 60, 0, 2, 0);
+                            var shoppingCart3 = new ShoppingCart("milk", 20, 0, 3, 0);
+                            var shoppingCart4 = new ShoppingCart("egg", 10, 0, 4, 0);
+                            var shoppingCart5 = new ShoppingCart("banana", 70, 0, 5, 0);
+                            var shoppingCart6 = new ShoppingCart("apple", 90, 0, 6, 0);
+                            var ShoppingCarts = [shoppingCart1, shoppingCart2, shoppingCart3, shoppingCart4, shoppingCart5, shoppingCart6];
+
+                            function randomList() {
+                                ShoppingCarts.sort(new function() {
+                                    return Math.random() - 0.5 > 0 ? 1 : -1;
+                                })
+                            }
+
+                            // var shoppingcartMap = new Map();
+
+                            function showPic() {
+                                // dropTable();
+                                var shoppingcartMap = new Map();
+                                var table = document.createElement("table");
+                                var list = [];
+                                for (var i = 0; i < 2; i++) {
+                                    var tr = document.createElement("tr");
+                                    for (var j = 0; j < 2; j++) {
+                                        var num;
+                                        while (true) {
+                                            var flag = 0;
+                                            num = GetRandomNum(1, 6);
+                                            for (var k = 0; k < list.length; k++) {
+                                                if (list[k] == num) {
+                                                    flag = 1;
+                                                    break;
+                                                }
+                                            }
+                                            if (flag == 1) continue;
+                                            else break;
+                                        }
+                                        list.push(num);
+                                        var td = document.createElement("td");
+                                        var img = document.createElement("img");
+                                        var btn = document.createElement("button");
+                                        ShoppingCarts.forEach(function(item, index, array) {
+                                            if (item.pic == num) {
+                                                shoppingcartMap.put(item.pic, item);
+
+
+                                                img.setAttribute("src", "img/" + item.pic + ".png");
+
+                                                // ShoppingCarts.push(ShoppingCart);
+                                                btn.innerHTML = "buy";
+                                                btn.onclick = function() {
+                                                    addToCart(item.pic, array);
+                                                    // alert("item.pic" + item.pic);
+                                                };
+                                            }
+                                        });
+
+                                        td.appendChild(img);
+                                        td.appendChild(btn);
+                                        tr.appendChild(td);
+                                    }
+                                    table.appendChild(tr);
+
+                                }
+                                document.getElementById("content-left").appendChild(table);
+
+                            }
+
+                            function test(item, array) {
+                                return new function() {
+                                    addToCart(item.pic, array);
+                                }
+                            }
+
+                            window.onload = function() {
+                                showPic();
+                                var login = document.getElementById('login');
+                                var logout = document.getElementById('logout');
+                                var order = document.getElementById('order');
+                                login.onclick = function() {
+                                    window.open('./jsp/loginJsp.jsp');
+
+
+
+
+                                }
+                            }
+
+                            function GetRandomNum(Min, Max) {
+                                var Range = Max - Min;
+                                var Rand = Math.random();
+                                return (Min + Math.round(Rand * Range));
+                            }
+
+                            // function dropTable() {
+                            //     var tb = document.getElementById("content-left").getElementsByTagName("table")[0];
+                            //     if (tb) {
+                            //         tb.parentNode.removeChild(tb);
+                            //     }
+                            // }
+
+                            function addToCart(num, array) {
+                                for (var i = 0; i < 6; i++) {
+                                    if (ShoppingCarts[i].pic == num) {
+                                        ShoppingCarts[i].count++;
+                                        dropTableCart();
+                                        // alert(ShoppingCarts[i].pic);
+                                        // alert(ShoppingCarts[i].count);
+
+                                    }
+                                }
+                                showCart(array);
+                            }
+
+
+
+                            function showCart(array) {
+
+                                // alert("show");
+                                var divRight = document.getElementById("right");
+                                var tableCart = document.createElement("table");
+
+                                var trCart = document.createElement("tr");
+                                var td1Cart = document.createElement("td");
+                                td1Cart.innerHTML = "name";
+                                var td2Cart = document.createElement("td");
+                                td2Cart.innerHTML = "Count";
+                                var td3Cart = document.createElement("td");
+                                td3Cart.innerHTML = "Price";
+                                var td4Cart = document.createElement("td");
+                                td4Cart.innerHTML = "sub-total";
+                                trCart.appendChild(td1Cart);
+                                trCart.appendChild(td2Cart);
+                                trCart.appendChild(td3Cart);
+                                trCart.appendChild(td4Cart);
+
+                                tableCart.appendChild(trCart);
+
+                                var total = 0;
+                                array.forEach(function(item, index, array) {
+                                    // var shoppingCart = ShoppingCarts[i];
+                                    if (item.count > 0) {
+                                        var trCart = document.createElement("tr");
+                                        var td1Cart = document.createElement("td");
+                                        td1Cart.innerHTML = item.name;
+                                        var td2Cart = document.createElement("td");
+                                        td2Cart.innerHTML = item.count;
+                                        var td3Cart = document.createElement("td");
+                                        td3Cart.innerHTML = item.price;
+                                        var td4Cart = document.createElement("td");
+                                        td4Cart.innerHTML = item.price * item.count;
+                                        var btnAdd = document.createElement("button");
+                                        var btnReduce = document.createElement("button");
+                                        total = Number(td4Cart.innerHTML) + total;
+                                        btnAdd.innerHTML = "+";
+                                        btnReduce.innerHTML = "-";
+
+                                        btnAdd.onclick = function() {
+                                            addCount(item, array);
+                                        };
+                                        btnReduce.onclick = function() {
+                                            reduceCount(item, array);
+                                        };
+                                        // td2Cart.innerHTML = "dfadf ";
+                                        td2Cart.appendChild(btnAdd);
+                                        td2Cart.appendChild(btnReduce);
+                                        trCart.appendChild(td1Cart);
+                                        trCart.appendChild(td2Cart);
+                                        trCart.appendChild(td3Cart);
+                                        trCart.appendChild(td4Cart);
+                                        tableCart.appendChild(trCart);
+                                        document.body.appendChild(tableCart);
+                                        document.getElementById("content-right").appendChild(tableCart);
+
+                                    }
+                                });
+                                var trCartSum = document.createElement("tr");
+                                trCartSum.innerHTML = "Totle: " + total;
+                                tableCart.appendChild(trCartSum);
+
+                                var trCartOrderTr = document.createElement("tr");
+                                var trCartOrder = document.createElement("button");
+                                trCartOrder.innerHTML = "Order";
+                                tableCart.appendChild(trCartOrderTr);
+                                trCartOrderTr.appendChild(trCartOrder);
+                                 trCartOrder.onclick = function() {
+                                                    // addToOrder(item.pic, array);
+                                                };
+                            }
+
+                            function addCount(item, array) {
+                                item.count++;
+                                dropTableCart();
+                                showCart(array);
+                            }
+
+                            function reduceCount(item, array) {
+                                if (item.count > 0) {
+                                    item.count--;
+                                } else {
+                                    alert("It's zero, you can't reduce more.");
+                                }
+
+                                dropTableCart();
+                                showCart(array);
+                            }
+
+                            function dropTableCart() {
+                                var tb = document.getElementById("content-right").getElementsByTagName("table")[0];
+                                if (tb) {
+                                    tb.parentNode.removeChild(tb);
+                                }
+                            }
+
+                        })();
                         </script>
                     </div>
                 </div>
-                <div class="content-right" id="showCarts">
+                <div class="content-right" id="content-right">
                     <h1>show carts</h1>
                 </div>
-            </div>
-            <div id="side">
-                <div id="footer"> footer</div>
             </div>
         </div>
     </body>

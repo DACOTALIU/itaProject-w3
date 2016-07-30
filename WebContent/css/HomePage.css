@@ -33,20 +33,19 @@
 }
 #mainContent {}
 
-#side {
-    width: 200px;
-    float: left;
-}
 
 #main {
-    width: 750px;
-    float: right;
+    width: 1500px;
+    height: 1000px;
+    background-color: aquamarine;
 }
 
 .content-left {
+    float: left;
     border-top: 3px solid #ccc;
 }
 .content-ritht {
+    float: right;
     border-top: 3px solid #ccc;
 }
 
