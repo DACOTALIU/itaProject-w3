@@ -1,0 +1,59 @@
+@CHARSET "ISO-8859-1";
+<style> bory {
+    margin: 0px;
+    padding: 0px;
+}
+
+#container {
+    width: 950px;
+}
+
+#header {
+    height: 50px;
+    background-color: darkmagenta
+}
+
+/*
+#nav {
+    height: 25px;
+    background-color: darkorange
+}
+*/
+
+/*
+#nav ul li {
+    float: left;
+}
+*/
+.controller{
+	float: right;
+	w2:200px;
+	border color: blue;
+	padding: 5px;
+}
+#mainContent {}
+
+#side {
+    width: 200px;
+    float: left;
+}
+
+#main {
+    width: 750px;
+    float: right;
+}
+
+.content-left {
+    border-top: 3px solid #ccc;
+}
+.content-ritht {
+    border-top: 3px solid #ccc;
+}
+
+
+#footer {
+    height: 50px;
+    background-color: darkorange
+}
+
+</style>
