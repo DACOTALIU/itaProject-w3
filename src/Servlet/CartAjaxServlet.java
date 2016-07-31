@@ -44,7 +44,7 @@ public class CartAjaxServlet extends HttpServlet {
 //		String dishesJson =  new String(request.getParameter("array"));//.getBytes("ISO-8859-1"),"UTF-8"
 		String dishJ =request.getParameter("query");
 		System.out.println(dishJ);
-//		Object cDish=JSONUtil.json2Object(dishJ, cDishes.class);
+		Object cDish=JSONUtil.json2Object(dishJ, cDishes.class);
 //		System.out.println(cDish.toString());
 //		for (cDishes cDishes : dishes) {
 //			System.out.println(cDishes.getdName());

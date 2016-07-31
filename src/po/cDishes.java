@@ -1,43 +1,36 @@
 package po;
 
 public class cDishes {
-	public String dName;
-	public double dPrice;
-	public int pic;//dId
-	public int dCount;
-	public cDishes(String dName, double dPrice, int pic, int dCount, int flag) {
-		super();
-		this.dName = dName;
-		this.dPrice = dPrice;
-		this.pic = pic;
-		this.dCount = dCount;
-		this.flag = flag;
-	}
+	public String name;// dId
+	public Double price;
+	public int count;
+	public int pic;
 	public int flag;
-	public int getFlag() {
-		return flag;
-	}
-	public void setFlag(int flag) {
+	public cDishes(String name, Double price, int count, int pic, int flag) {
+		super();
+		this.name = name;
+		this.price = price;
+		this.count = count;
+		this.pic = pic;
 		this.flag = flag;
 	}
-	public cDishes(String dName, double dPrice, int pic, int dCount) {
-		super();
-		this.dName = dName;
-		this.dPrice = dPrice;
-		this.pic = pic;
-		this.dCount = dCount;
+	public String getName() {
+		return name;
 	}
-	public String getdName() {
-		return dName;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public void setdName(String dName) {
-		this.dName = dName;
+	public Double getPrice() {
+		return price;
 	}
-	public double getdPrice() {
-		return dPrice;
+	public void setPrice(Double price) {
+		this.price = price;
 	}
-	public void setdPrice(double dPrice) {
-		this.dPrice = dPrice;
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 	public int getPic() {
 		return pic;
@@ -45,11 +38,15 @@ public class cDishes {
 	public void setPic(int pic) {
 		this.pic = pic;
 	}
-	public int getdCount() {
-		return dCount;
+	public int getFlag() {
+		return flag;
 	}
-	public void setdCount(int dCount) {
-		this.dCount = dCount;
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
+	public cDishes() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 }
