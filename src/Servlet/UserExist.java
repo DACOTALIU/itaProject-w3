@@ -7,7 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import po.CClient;
 import service.CClientManager;
 import service.impl.CClientManagerImpl;
 
@@ -16,9 +18,9 @@ import service.impl.CClientManagerImpl;
  */
 public class UserExist extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	class Exist{
-		int existSatus=0;
+	CClientManager cClientManager=new CClientManagerImpl();
+	class Exist {
+		int existSatus = 0;
 
 		public Exist(int existSatus) {
 			super();
@@ -33,52 +35,65 @@ public class UserExist extends HttpServlet {
 			this.existSatus = existSatus;
 		}
 	}
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UserExist() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public UserExist() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String username = new String(request.getParameter("username").getBytes("ISO-8859-1"), "UTF-8");
 		String password = request.getParameter("password");
-//		HttpSession httpSession = request.getSession();
-		System.out.println(username+"--"+password);
+		HttpSession httpSession = request.getSession();
+		System.out.println(username + "--" + password);
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
-//		out=null;
+		// out=null;
 		CClientManager cClientManager = new CClientManagerImpl();
-		if (username.length()>0) {
-			
-		
-		if (cClientManager.checkUserExist(username) == 1) {
-			System.out.println("the username is right");
-//			CClient client = new CClient(username, password);
-			out.print("the username doesn't exist by ajax");
+		if (username.length() > 0) {
 
-//		request.getRequestDispatcher("index.html").forward(request, response);
-//			httpSession.setAttribute("client", client);
-		} else {
+			if (cClientManager.checkUserExist(username) == 1) {
+				System.out.println("the username is right");
+				out.print("the username doesn't exist by ajax");
 
-			out.print("Sorry !the username is exist");
-			System.out.println("the username is exist by ajax");
-		}
+				// request.getRequestDispatcher("index.html").forward(request,
+				// response);
+//				httpSession.setAttribute("client", client);
+			} else {
+
+				out.print("Sorry !the username is exist");
+				System.out.println("the username is exist by ajax");
+			}
 		}
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession httpSession = request.getSession();
+		String username = new String(request.getParameter("username").getBytes("ISO-8859-1"), "UTF-8");
+		String password = request.getParameter("password");
+		CClient client = new CClient(username, password);
+		httpSession.setAttribute("client",client);
+		System.out.println(client.getcPassword() + "password");
+		cClientManager.addCClient(client.getcUsername(), client.getcPassword());
+
+		PrintWriter out = response.getWriter();
 		System.out.println("post");
-		
+		out.println("<script>alert(\"add successful\");</script>");
+
 	}
 
 }
