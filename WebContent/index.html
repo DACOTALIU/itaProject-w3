@@ -30,7 +30,7 @@
                     <div class="showDishes">
                         <h4>script</h4>
                         <script type="text/javascript">
-                     (function() {
+                        (function() {
                             function ShoppingCart(name, price, count, pic, flag) {
                                 this.name = name;
                                 this.price = price;
@@ -90,7 +90,7 @@
                                                 // ShoppingCarts.push(ShoppingCart);
                                                 btn.innerHTML = "buy";
                                                 btn.onclick = function() {
-                                                    addToCart(item.pic, array);
+                                                    addToCart(item, array);
                                                     // alert("item.pic" + item.pic);
                                                 };
                                             }
@@ -106,12 +106,12 @@
                                 document.getElementById("content-left").appendChild(table);
 
                             }
-
-                            function test(item, array) {
-                                return new function() {
-                                    addToCart(item.pic, array);
-                                }
-                            }
+                            //closure
+                            // function test(item, array) {
+                            //     return new function() {
+                            //         addToCart(item.pic, array);
+                            //     }
+                            // }
 
                             window.onload = function() {
                                 showPic();
@@ -140,9 +140,9 @@
                             //     }
                             // }
 
-                            function addToCart(num, array) {
+                            function addToCart(item, array) {
                                 for (var i = 0; i < 6; i++) {
-                                    if (ShoppingCarts[i].pic == num) {
+                                    if (ShoppingCarts[i].pic == item.pic) {
                                         ShoppingCarts[i].count++;
                                         dropTableCart();
                                         // alert(ShoppingCarts[i].pic);
@@ -224,10 +224,10 @@
                                 trCartOrder.innerHTML = "Order";
                                 tableCart.appendChild(trCartOrderTr);
                                 trCartOrderTr.appendChild(trCartOrder);
-                                 trCartOrder.onclick = function() {
-                                                    // addToOrder(item.pic, array);
-                                                    
-                                                };
+                                trCartOrder.onclick = function() {
+                                    // addToOrder(item.pic, array);
+
+                                };
                             }
 
                             function addCount(item, array) {
