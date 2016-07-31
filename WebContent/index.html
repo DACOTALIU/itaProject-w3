@@ -145,13 +145,13 @@
                                     if (ShoppingCarts[i].pic == item.pic) {
                                         ShoppingCarts[i].count++;
                                         dropTableCart();
-                                        useAjaxFunction(item, array, log);
                                         // alert(ShoppingCarts[i].pic);
                                         // alert(ShoppingCarts[i].count);
 
                                     }
                                 }
                                 showCart(array);
+                                useAjaxFunction(item, array, log);
                             }
 
 
@@ -257,47 +257,54 @@
                                 }
                             }
 
-                      
-                        //ajax
-                        function useAjaxFunction(item, array,log) {
-                            alert("000");
-                            var sp = new SuggestPanel("showAjax");
-                            var contentDiv = document.getElementById("showAjax");
-                            var useAjax = document.getElementById("content-right");
-                            //console.log(username);
-                                var dishesJson = JSON.stringify(array);
-                            dishesJson.onpropertychange = function() {
-                                var query = dishesJson;
-                                    console.log(query);
+
+                            //ajax
+                            function useAjaxFunction(item, array, log) {
+                                var sp = new SuggestPanel("showAjax");
+                                var contentDiv = document.getElementById("showAjax");
+                                var useAjax = document.getElementById("content-right");
+                                var listDishCart=[];
+                                array.forEach(function(item, index, array){
+                                    if(item.Count>0){
+                                        listDishCart.push(item);
+                                    }
+                                });
+                                var query = "query=" + listDishCart;
+                                // console.log(query);
                                 if (query != "") {
                                     var xhr = new XMLHttpRequest();
-                                    var url = "exist?useAjax=" + query;
+                                    var url = "cartAjax";
                                     // if (sp.hasCache(query)) {
                                     //  sp.showFromCache(query);
                                     // } else {
                                     xhr.onreadystatechange = function() {
-                                            //  sp.clear();
-                                            if (xhr.readyState == 4 && xhr.status == 200) {
-                                                var result = xhr.responseText;
-                                                // if (result.length > 0) {
-                                                // }
+                                        //  sp.clear();
+                                        //if (xhr.readyState == 4) {
+                                        if (xhr.readyState == 4 && xhr.status == 200) {
+                                            //what is the 200?
+                                            var result = xhr.responseText;
 
-                                                if (result != "") {
-                                                var dishesObject = JSON.parse(result);
-                                                    contentDiv.innerHTML = "Already change in DB, Count:"+item.Count;
-                                                sp.spData = dishesObject;
-                                                sp.show();
-                                                sp.cache(query, dishesObject);
-                                            }
-                                        }
-                                        }
+                                            console.log(result);
+                                            // if (result.length > 0) {
+                                            // }
 
-                                    xhr.open("GET", url, true);
-                                    xhr.send();
+                                            // if (result != "") {
+                                            //     var dishesObject = JSON.parse(result);
+                                            contentDiv.innerHTML = "Already change in DB, Count:" + item.Count;
+                                            // sp.spData = dishesObject;
+                                            // sp.show();
+                                            // sp.cache(query, dishesObject);
+                                            // }
+                                        }
+                                    }
+                                    if (query != null) {
+                                        xhr.open("POST", url, true);
+                                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                                        xhr.send(query);
+                                    }
                                 }
-                            }
 
-                             }
+                            }
 
                         })()
                         </script>

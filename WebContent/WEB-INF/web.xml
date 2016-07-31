@@ -50,4 +50,14 @@
     <servlet-name>UserExist</servlet-name>
     <url-pattern>/exist</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CartAjaxServlet</display-name>
+    <servlet-name>CartAjaxServlet</servlet-name>
+    <servlet-class>Servlet.CartAjaxServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CartAjaxServlet</servlet-name>
+    <url-pattern>/cartAjax</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -5,6 +5,21 @@ public class cDishes {
 	public double dPrice;
 	public int pic;//dId
 	public int dCount;
+	public cDishes(String dName, double dPrice, int pic, int dCount, int flag) {
+		super();
+		this.dName = dName;
+		this.dPrice = dPrice;
+		this.pic = pic;
+		this.dCount = dCount;
+		this.flag = flag;
+	}
+	public int flag;
+	public int getFlag() {
+		return flag;
+	}
+	public void setFlag(int flag) {
+		this.flag = flag;
+	}
 	public cDishes(String dName, double dPrice, int pic, int dCount) {
 		super();
 		this.dName = dName;
