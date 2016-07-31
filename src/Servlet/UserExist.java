@@ -85,6 +85,7 @@ public class UserExist extends HttpServlet {
 		HttpSession httpSession = request.getSession();
 		String username = new String(request.getParameter("username").getBytes("ISO-8859-1"), "UTF-8");
 		String password = request.getParameter("password");
+		//判断是否username in database is it exist;
 		CClient client = new CClient(username, password);
 		httpSession.setAttribute("client",client);
 		System.out.println(client.getcPassword() + "password");
@@ -92,7 +93,8 @@ public class UserExist extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		System.out.println("post");
-		out.println("<script>alert(\"add successful\");</script>");
+		out.println("<script>alert(\"add successful\");window.location.href='index.html'</script>");
+//		request.getRequestDispatcher("index.html").forward(request, response);
 
 	}
 
