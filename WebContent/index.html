@@ -262,18 +262,20 @@
                             function useAjaxFunction(item, array, log) {
                                 var sp = new SuggestPanel("showAjax");
                                 var contentDiv = document.getElementById("showAjax");
-                                var useAjax = document.getElementById("content-right");
-                                var listDishCart=[];
-                                array.forEach(function(item, index, array){
-                                    if(item.Count>0){
-                                        listDishCart.push(item);
-                                    }
-                                });
-                                var query = "query=" + listDishCart;
+                                // var useAjax = document.getElementById("content-right");
+                                // var listDishCart=[];
+                                // array.forEach(function(item, index, array){
+                                //     if(item.count>0){
+                                //         listDishCart.push(item);
+                                //     }
+                                // });
+                                // var query = "query=" + listDishCart;
                                 // console.log(query);
-                                if (query != "") {
+                                if (item != "") {
                                     var xhr = new XMLHttpRequest();
                                     var url = "cartAjax";
+                                // var dishesJson = JSON.stringify(array);
+                                    var query ="query="+JSON.stringify(item);
                                     // if (sp.hasCache(query)) {
                                     //  sp.showFromCache(query);
                                     // } else {
@@ -290,18 +292,18 @@
 
                                             // if (result != "") {
                                             //     var dishesObject = JSON.parse(result);
-                                            contentDiv.innerHTML = "Already change in DB, Count:" + item.Count;
+                                            contentDiv.innerHTML = "Already change in DB, Count:" + item.count;
                                             // sp.spData = dishesObject;
                                             // sp.show();
                                             // sp.cache(query, dishesObject);
                                             // }
                                         }
                                     }
-                                    if (query != null) {
-                                        xhr.open("POST", url, true);
-                                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                                        xhr.send(query);
-                                    }
+
+                                    xhr.open("POST", url, true);
+                                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                                    xhr.send(query);
+
                                 }
 
                             }
