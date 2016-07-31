@@ -8,8 +8,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import po.CCart;
+import po.CClient;
 import po.cDishes;
+import service.CCartManager;
+import service.impl.CCartManagerImpl;
 import util.JSONUtil;
 
 /**
@@ -42,9 +47,19 @@ public class CartAjaxServlet extends HttpServlet {
 		System.out.println("dopost..........................");
 		// TODO Auto-generated method stub
 //		String dishesJson =  new String(request.getParameter("array"));//.getBytes("ISO-8859-1"),"UTF-8"
+		HttpSession httpSession=request.getSession();
+		CClient cClient=(CClient) httpSession.getAttribute("client");
 		String dishJ =request.getParameter("query");
 		System.out.println(dishJ);
 		Object cDish=JSONUtil.json2Object(dishJ, cDishes.class);
+		CCartManager cartManager=new CCartManagerImpl();
+		List<CCart>cCarts=cartManager.listCCart();
+		for (CCart cCart : cCarts) {
+			if(cCart.getcId()==cClient.cId){
+				
+			}
+		}cartManager.addCCartManager();
+		
 //		System.out.println(cDish.toString());
 //		for (cDishes cDishes : dishes) {
 //			System.out.println(cDishes.getdName());
