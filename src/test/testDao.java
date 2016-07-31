@@ -38,7 +38,7 @@ public class testDao {
 	}	
 	@Test
 	public void addCCart() {
-		CCart cart=new CCart(4, 1, 2);
+		CCart cart=new CCart(4,"abc");
 		cartDao.addCCart(cart);
 		assert(cartDao.addCCart(cart)!=0);
 		}

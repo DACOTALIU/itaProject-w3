@@ -13,16 +13,15 @@ public class CCartDaoImpl implements CCartDao {
 
 	@Override
 	public int addCCart(CCart cart) {
-			String sql = "insert into cCart (cId,dId,dNum) values (?,?,?)";
+			String sql = "insert into cCart (cId,dishes) values (?,?)";
 			Connection con = null;
 			PreparedStatement pst = null;
 			con = DbUtil.connect();
 			int m = 0;
 			try {
 				pst = con.prepareStatement(sql);
-				pst.setInt(1,cart.cId);
-				pst.setInt(2, cart.dId);
-				pst.setInt(3, cart.dNum);
+				pst.setInt(1,cart.getcId());
+				pst.setString(2, cart.getdishes());
 				m = pst.executeUpdate();
 				con.commit();
 			} catch (SQLException e) {

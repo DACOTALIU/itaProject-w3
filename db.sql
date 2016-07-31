@@ -8,5 +8,6 @@ insert into cClients(cId,CUSERNAME,cPassword) values (cClients_seq.nextval,'bbdd
 insert into cClients(cId,CUSERNAME,cPassword) values (cClients_seq.nextval,'bbeee','123');
 insert into cClients(cId,CUSERNAME,cPassword) values (cClients_seq.nextval,'bddf','123');
 
-create table cCart(cId number(6),dId number(6),dNum number(6));
+create table cCart(cId number(6),dishes varchar2(200));
 select * from CCART;
+drop table CCart;
