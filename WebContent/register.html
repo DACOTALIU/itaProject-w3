@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- <script type="text/javascript" src="javaScript/SuggestionPanel.js"></script> -->
+
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>register</title>
+
+</head>
+<body>
+	<h1>Register Form</h1>
+	<form action="./exist" method="post">
+		<div class="login_user">
+			<label for="username">User name: </label> <input type="text"
+				id="username" name="username"/><br>
+		</div>
+		<div id="content"></div>
+		<div class="login_user">
+			<label for="password">Password: </label> <input type="password"
+				id="password" name="password" /><br>
+		</div>
+
+		<div class="login_user">
+			<input type="submit" id="submit" name="submit" value="Login" /> <input
+				type="button" id="back" name="back" value="Back" />
+		</div>
+
+	</form>
+
+</body>
+<script>
+ (function() {
+
+		//var sp = new SuggestPanel("content");
+		var contentDiv = document.getElementById("content");
+		var username = document.getElementById("username");
+		//console.log(username);
+		username.onkeyup = function() {
+			var query = username.value;
+			if (query != "") {
+				var xhr = new XMLHttpRequest();
+				var url = "exist?username=" + username.value;
+				console.log(url);
+				// if (sp.hasCache(query)) {
+				// 	sp.showFromCache(query);
+				// } else {
+					xhr.onreadystatechange = function() {
+					//	sp.clear();
+						if (xhr.readyState == 4 && xhr.status == 200) {
+							var result = xhr.responseText;
+							if (result.length>0) {
+								contentDiv.innerHTML=result;
+							}
+							
+							// if (result != "") {
+								// var list = JSON.parse(result);
+								// sp.spData = result;
+								// sp.show();
+								// sp.cache(query, list);
+							}
+						}
+					// }
+
+					xhr.open("GET", url, true);
+					xhr.send();
+				}
+			}
+
+		// }
+
+	})()
+</script>
+</html>
