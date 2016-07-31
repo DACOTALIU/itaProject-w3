@@ -90,7 +90,7 @@
                                                 // ShoppingCarts.push(ShoppingCart);
                                                 btn.innerHTML = "buy";
                                                 btn.onclick = function() {
-                                                    addToCart(item, array);
+                                                    addToCart(item, array,1);
                                                     // alert("item.pic" + item.pic);
                                                 };
                                             }
@@ -140,7 +140,7 @@
                             //     }
                             // }
 
-                            function addToCart(item, array) {
+                            function addToCart(item, array,log) {
                                 for (var i = 0; i < 6; i++) {
                                     if (ShoppingCarts[i].pic == item.pic) {
                                         ShoppingCarts[i].count++;
@@ -197,10 +197,10 @@
                                         btnReduce.innerHTML = "-";
 
                                         btnAdd.onclick = function() {
-                                            addCount(item, array);
+                                            addCount(item, array,2);
                                         };
                                         btnReduce.onclick = function() {
-                                            reduceCount(item, array);
+                                            reduceCount(item, array,3);
                                         };
                                         // td2Cart.innerHTML = "dfadf ";
                                         td2Cart.appendChild(btnAdd);
@@ -230,13 +230,13 @@
                                 };
                             }
 
-                            function addCount(item, array) {
+                            function addCount(item, array,log) {
                                 item.count++;
                                 dropTableCart();
                                 showCart(array);
                             }
 
-                            function reduceCount(item, array) {
+                            function reduceCount(item, array,log) {
                                 if (item.count > 0) {
                                     item.count--;
                                 } else {
@@ -255,6 +255,7 @@
                             }
 
                         })();
+                        
                         </script>
                     </div>
                 </div>
