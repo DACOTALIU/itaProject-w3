@@ -90,7 +90,7 @@
                                                 // ShoppingCarts.push(ShoppingCart);
                                                 btn.innerHTML = "buy";
                                                 btn.onclick = function() {
-                                                    addToCart(item, array,1);
+                                                    addToCart(item, array, 1);
                                                     // alert("item.pic" + item.pic);
                                                 };
                                             }
@@ -140,11 +140,12 @@
                             //     }
                             // }
 
-                            function addToCart(item, array,log) {
+                            function addToCart(item, array, log) {
                                 for (var i = 0; i < 6; i++) {
                                     if (ShoppingCarts[i].pic == item.pic) {
                                         ShoppingCarts[i].count++;
                                         dropTableCart();
+                                        useAjaxFunction(item, array, log);
                                         // alert(ShoppingCarts[i].pic);
                                         // alert(ShoppingCarts[i].count);
 
@@ -160,7 +161,7 @@
                                 // alert("show");
                                 var divRight = document.getElementById("right");
                                 var tableCart = document.createElement("table");
-
+                                tableCart.id = "useAjax";
                                 var trCart = document.createElement("tr");
                                 var td1Cart = document.createElement("td");
                                 td1Cart.innerHTML = "name";
@@ -197,10 +198,10 @@
                                         btnReduce.innerHTML = "-";
 
                                         btnAdd.onclick = function() {
-                                            addCount(item, array,2);
+                                            addCount(item, array, 2);
                                         };
                                         btnReduce.onclick = function() {
-                                            reduceCount(item, array,3);
+                                            reduceCount(item, array, 3);
                                         };
                                         // td2Cart.innerHTML = "dfadf ";
                                         td2Cart.appendChild(btnAdd);
@@ -230,13 +231,14 @@
                                 };
                             }
 
-                            function addCount(item, array,log) {
+                            function addCount(item, array, log) {
                                 item.count++;
                                 dropTableCart();
+                                useAjaxFunction(item, array, log);
                                 showCart(array);
                             }
 
-                            function reduceCount(item, array,log) {
+                            function reduceCount(item, array, log) {
                                 if (item.count > 0) {
                                     item.count--;
                                 } else {
@@ -244,6 +246,7 @@
                                 }
 
                                 dropTableCart();
+                                useAjaxFunction(item, array, log);
                                 showCart(array);
                             }
 
@@ -254,14 +257,56 @@
                                 }
                             }
 
-                        })();
-                        
+                      
+                        //ajax
+                        function useAjaxFunction(item, array,log) {
+                            alert("000");
+                            var sp = new SuggestPanel("showAjax");
+                            var contentDiv = document.getElementById("showAjax");
+                            var useAjax = document.getElementById("content-right");
+                            //console.log(username);
+                                var dishesJson = JSON.stringify(array);
+                            dishesJson.onpropertychange = function() {
+                                var query = dishesJson;
+                                    console.log(query);
+                                if (query != "") {
+                                    var xhr = new XMLHttpRequest();
+                                    var url = "exist?useAjax=" + query;
+                                    // if (sp.hasCache(query)) {
+                                    //  sp.showFromCache(query);
+                                    // } else {
+                                    xhr.onreadystatechange = function() {
+                                            //  sp.clear();
+                                            if (xhr.readyState == 4 && xhr.status == 200) {
+                                                var result = xhr.responseText;
+                                                // if (result.length > 0) {
+                                                // }
+
+                                                if (result != "") {
+                                                var dishesObject = JSON.parse(result);
+                                                    contentDiv.innerHTML = "Already change in DB, Count:"+item.Count;
+                                                sp.spData = dishesObject;
+                                                sp.show();
+                                                sp.cache(query, dishesObject);
+                                            }
+                                        }
+                                        }
+
+                                    xhr.open("GET", url, true);
+                                    xhr.send();
+                                }
+                            }
+
+                             }
+
+                        })()
                         </script>
                     </div>
                 </div>
                 <div class="content-right" id="content-right">
                     <h1>show carts</h1>
                 </div>
+                <div id="showAjax" bgcolor="blue">aaaa</div>
             </div>
         </div>
     </body>
