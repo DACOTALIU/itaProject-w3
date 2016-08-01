@@ -37,13 +37,17 @@ public class loginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		PrintWriter out=response.getWriter();
 		HttpSession httpSession = request.getSession();
 		CClientManager cClientManager = new CClientManagerImpl();
 		if (cClientManager.checkPwd(username, password) == 1) {
 			System.out.println("enter right");
 			CClient client = new CClient(username, password);
 			httpSession.setAttribute("client", client);
+
+			out.print("<script>alert(\"enter right\")</script>");
 		} else {
+			out.print("<script>alert(\"Your enter is wrong\")</script>");
 			System.out.println("Your enter is wrong");
 		}
 		request.getRequestDispatcher("index.html").forward(request, response);

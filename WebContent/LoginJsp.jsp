@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="../login" method="post">
+	<form action="./login" method="post">
 		<div class="login_user">
 			<label for="password">User name: </label> 
 		<input type="text" id="username" name="username"><br>

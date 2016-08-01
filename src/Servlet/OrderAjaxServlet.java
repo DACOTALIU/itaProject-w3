@@ -49,6 +49,10 @@ public class OrderAjaxServlet extends HttpServlet {
 			long nowTime = now.getTime();
 
 			COrder cOrder = new COrder(cCart.getcId(), cCart, nowTime);
+//			System.out.println(cOrder.getoId());
+			System.out.println(cOrder.getCart().cId);
+			System.out.println(cOrder.getCart().dishes);
+			System.out.println(cOrder.getData());
 			cOrderManager.addCOrder(cOrder);
 			cCartManager.deleteCCartManager(cCart.getcId());
 			// abandon table cart.....

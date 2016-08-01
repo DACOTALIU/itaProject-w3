@@ -119,8 +119,8 @@
                                 var logout = document.getElementById('logout');
                                 var order = document.getElementById('order');
                                 login.onclick = function() {
-                                    window.open('./loginJsp.jsp');
-
+                                    // window.open('./loginJsp.jsp');
+                                    window.location.href = "LoginJsp.jsp";
 
 
 
@@ -243,8 +243,7 @@
                                     }
                                     xhr.open("GET", url, true);
                                     xhr.send();
-
-
+                                    dropTableCart();
                                 };
                             }
 
@@ -326,21 +325,21 @@
 
                             }
 
-                           (function(){
-                            var showOrderBtn=document.getElementById("order");
-                            showOrderBtn.onclick=function(){
-                            //     var xhr=new XMLHttpRequest();
-                            //     var url="showOrder";
-                            //     xhr.onreadystatechange=function(){
-                            //         if(xhr.readyState==4&&xhr.status==200){
-                            //             var result=xhr.responseText;
-                            //         }
-                            //     }
-                            // xhr.open("GET",url,true);
-                            // xhr.send();
-                            window.location.href="showOrder";
-                            }
-                           }) ();
+                            (function() {
+                                var showOrderBtn = document.getElementById("order");
+                                showOrderBtn.onclick = function() {
+                                    //     var xhr=new XMLHttpRequest();
+                                    //     var url="showOrder";
+                                    //     xhr.onreadystatechange=function(){
+                                    //         if(xhr.readyState==4&&xhr.status==200){
+                                    //             var result=xhr.responseText;
+                                    //         }
+                                    //     }
+                                    // xhr.open("GET",url,true);
+                                    // xhr.send();
+                                    window.location.href = "showOrder";
+                                }
+                            })();
 
                         })();
                         </script>
@@ -349,7 +348,7 @@
                 <div class="content-right" id="content-right">
                     <h1>show carts</h1>
                 </div>
-                <div id="showAjax" bgcolor="blue">aaaa</div>
+                <div id="showAjax" bgcolor="blue"></div>
             </div>
         </div>
     </body>
