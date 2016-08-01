@@ -8,6 +8,9 @@ public class CCart {
 		this.cId = cId;
 		this.dishes = dishes;
 	}
+	public CCart() {
+		// TODO Auto-generated constructor stub
+	}
 	public int getcId() {
 		return cId;
 	}
@@ -17,7 +20,7 @@ public class CCart {
 	public String getdishes() {
 		return dishes;
 	}
-	public void setdId(String dishes) {
+	public void setdishes(String dishes) {
 		this.dishes = dishes;
 	}
 	

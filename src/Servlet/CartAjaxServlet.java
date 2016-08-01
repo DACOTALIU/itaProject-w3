@@ -52,17 +52,20 @@ public class CartAjaxServlet extends HttpServlet {
 		CClient cClient=(CClient) httpSession.getAttribute("client");
 		String dishJ =request.getParameter("query");
 		System.out.println(dishJ);
+		CCart cart=new CCart();
 //		Object cDish=JSONUtil.json2Object(dishJ, cDishes.class);
 		CCartManager cartManager=new CCartManagerImpl();
 		if(cClient != null){
-		CCart cart=new CCart(cClient.cId, dishJ);
+			cart.setcId(cClient.getcId());
+			cart.setdishes(dishJ);
 			cartManager.updateCCartManager(cart);
 		}
 		else{
 			out.print("<script>alert(\"you haven't login yet\")</script>");
-			request.getRequestDispatcher("index.html").forward(request, response);
+			request.getRequestDispatcher("./jsp/loginJsp.jsp").forward(request, response);
 //			cartManager.addCCartManager(cart);
 		}
+		httpSession.setAttribute("cart", cart);
 //		List<CCart>cCarts=cartManager.listCCart();
 //		for (CCart cCart : cCarts) {
 //			if(cCart.getcId()==cClient.cId){
