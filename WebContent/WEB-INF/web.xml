@@ -60,4 +60,14 @@
     <servlet-name>CartAjaxServlet</servlet-name>
     <url-pattern>/cartAjax</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>OrderAjaxServlet</display-name>
+    <servlet-name>OrderAjaxServlet</servlet-name>
+    <servlet-class>Servlet.OrderAjaxServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderAjaxServlet</servlet-name>
+    <url-pattern>/order</url-pattern>
+  </servlet-mapping>
 </web-app>

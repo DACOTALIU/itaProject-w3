@@ -45,20 +45,30 @@ public class CartAjaxServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("dopost..........................");
+		PrintWriter out=response.getWriter();
 		// TODO Auto-generated method stub
 //		String dishesJson =  new String(request.getParameter("array"));//.getBytes("ISO-8859-1"),"UTF-8"
 		HttpSession httpSession=request.getSession();
 		CClient cClient=(CClient) httpSession.getAttribute("client");
 		String dishJ =request.getParameter("query");
 		System.out.println(dishJ);
-		Object cDish=JSONUtil.json2Object(dishJ, cDishes.class);
+//		Object cDish=JSONUtil.json2Object(dishJ, cDishes.class);
 		CCartManager cartManager=new CCartManagerImpl();
-		List<CCart>cCarts=cartManager.listCCart();
-		for (CCart cCart : cCarts) {
-			if(cCart.getcId()==cClient.cId){
-				
-			}
-		}cartManager.addCCartManager();
+		if(cClient != null){
+		CCart cart=new CCart(cClient.cId, dishJ);
+			cartManager.updateCCartManager(cart);
+		}
+		else{
+			out.print("<script>alert(\"you haven't login yet\")</script>");
+			request.getRequestDispatcher("index.html").forward(request, response);
+//			cartManager.addCCartManager(cart);
+		}
+//		List<CCart>cCarts=cartManager.listCCart();
+//		for (CCart cCart : cCarts) {
+//			if(cCart.getcId()==cClient.cId){
+//				
+//			}
+//		}cartManager.addCCartManager();
 		
 //		System.out.println(cDish.toString());
 //		for (cDishes cDishes : dishes) {

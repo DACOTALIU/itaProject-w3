@@ -222,11 +222,28 @@
 
                                 var trCartOrderTr = document.createElement("tr");
                                 var trCartOrder = document.createElement("button");
-                                trCartOrder.innerHTML = "Order";
+                                trCartOrder.innerHTML = "Buy";
                                 tableCart.appendChild(trCartOrderTr);
                                 trCartOrderTr.appendChild(trCartOrder);
+                                trCartOrder.id = "useAjaxOrder";
                                 trCartOrder.onclick = function() {
                                     // addToOrder(item.pic, array);
+                                    alert("click");
+                                    var xhr = new XMLHttpRequest();
+                                    var url = "order";
+                                    xhr.onreadystatechange = function() {
+                                        if (xhr.readyState == 4 && xhr.status == 200) {
+                                            var result = xhr.responseText;
+                                            if (result.length > 0) {
+                                                var contentDiv = document.getElementById("showAjax");
+                                                contentDiv.innerHTML = "order created";
+                                            }
+                                        }
+
+                                    }
+                                    xhr.open("GET", url, true);
+                                    xhr.send();
+
 
                                 };
                             }
@@ -263,19 +280,20 @@
                                 var sp = new SuggestPanel("showAjax");
                                 var contentDiv = document.getElementById("showAjax");
                                 // var useAjax = document.getElementById("content-right");
-                                // var listDishCart=[];
-                                // array.forEach(function(item, index, array){
-                                //     if(item.count>0){
-                                //         listDishCart.push(item);
-                                //     }
-                                // });
-                                // var query = "query=" + listDishCart;
+                                var listDishCart = [];
+                                array.forEach(function(item, index, array) {
+                                    if (item.count > 0) {
+                                        listDishCart.push(item);
+                                    }
+                                });
+                                var dishesJson = JSON.stringify(listDishCart);
+                                var query = "query=" + dishesJson;
                                 // console.log(query);
                                 if (item != "") {
                                     var xhr = new XMLHttpRequest();
                                     var url = "cartAjax";
-                                // var dishesJson = JSON.stringify(array);
-                                    var query ="query="+JSON.stringify(item);
+                                    // var dishesJson = JSON.stringify(array);
+                                    // var query ="query="+JSON.stringify(item);
                                     // if (sp.hasCache(query)) {
                                     //  sp.showFromCache(query);
                                     // } else {
