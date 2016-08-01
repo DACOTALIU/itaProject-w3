@@ -51,6 +51,8 @@ public class OrderAjaxServlet extends HttpServlet {
 			COrder cOrder = new COrder(cCart.getcId(), cCart, nowTime);
 			cOrderManager.addCOrder(cOrder);
 			cCartManager.deleteCCartManager(cCart.getcId());
+			// abandon table cart.....
+			// out.print("<script>dropTableCart();s</script>");
 			httpSession.setAttribute("cart", "");
 			response.getWriter().append("Served at: ").append(request.getContextPath());
 		} else {

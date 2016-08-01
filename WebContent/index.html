@@ -326,7 +326,23 @@
 
                             }
 
-                        })()
+                           (function(){
+                            var showOrderBtn=document.getElementById("order");
+                            showOrderBtn.onclick=function(){
+                            //     var xhr=new XMLHttpRequest();
+                            //     var url="showOrder";
+                            //     xhr.onreadystatechange=function(){
+                            //         if(xhr.readyState==4&&xhr.status==200){
+                            //             var result=xhr.responseText;
+                            //         }
+                            //     }
+                            // xhr.open("GET",url,true);
+                            // xhr.send();
+                            window.location.href="showOrder";
+                            }
+                           }) ();
+
+                        })();
                         </script>
                     </div>
                 </div>

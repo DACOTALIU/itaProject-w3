@@ -5,13 +5,13 @@ import javax.xml.crypto.Data;
 public class COrder {
 	int oId;
 	CCart cart;
-	long data;
+	long date;
 
 	public COrder(int oId, CCart cart, long nowTime) {
 		super();
 		this.oId = oId;
 		this.cart = cart;
-		this.data = nowTime;
+		this.date = nowTime;
 	}
 
 	public COrder() {
@@ -35,10 +35,10 @@ public class COrder {
 	}
 
 	public long getData() {
-		return data;
+		return date;
 	}
 
 	public void setData(long data) {
-		this.data = data;
+		this.date = data;
 	}
 }

@@ -70,4 +70,14 @@
     <servlet-name>OrderAjaxServlet</servlet-name>
     <url-pattern>/order</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ShowOrder</display-name>
+    <servlet-name>ShowOrder</servlet-name>
+    <servlet-class>Servlet.ShowOrder</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowOrder</servlet-name>
+    <url-pattern>/showOrder</url-pattern>
+  </servlet-mapping>
 </web-app>
